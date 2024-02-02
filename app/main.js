@@ -2,9 +2,17 @@ const net = require('net');
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    const httpResponse = 'HTTP/1.1 200 OK\r\n\r\n';
-    socket.write(httpResponse);
-    socket.end();
+    data = data.toString();
+    const path = data.match(/ (.*) /);
+
+    if (path[1] === '/') {
+      const response = 'HTTP/1.1 200 OK\r\n\r\n';
+
+      socket.write(response);
+      socket.end();
+    }
+    const error = 'HTTP/1.1 404 Not found\r\n\r\n';
+    socket.write(error);
   });
 
   socket.on('close', () => {
