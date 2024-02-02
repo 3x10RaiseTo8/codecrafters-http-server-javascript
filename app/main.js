@@ -10,11 +10,12 @@ const server = net.createServer((socket) => {
     if (path === '/') {
       socket.write(ok);
       socket.end();
-    } else if (path.startsWith('/echo/')) {
+    }
+    if (path.startsWith('/echo/')) {
       const randomString = path.slice(6);
       const type = 'Content-Type: text/plain';
       const length = `Content-Length: ${randomString.length}`;
-      const response = [ok, type, length, '', randomString];
+      const response = [ok, type, length, '', randomString, ''];
       socket.write(response.join('\r\n'));
     } else {
       socket.write(error);
