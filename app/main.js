@@ -1,5 +1,7 @@
 const net = require('net');
 
+// concurrency already implemented?
+
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     const request = data.toString().split(/\s+/);
