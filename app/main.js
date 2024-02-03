@@ -21,7 +21,8 @@ const server = net.createServer((socket) => {
       const file = path.slice(7);
       const filePath = resolve(process.argv[3], file);
       if (!existsSync(filePath)) {
-        return socket.write(error);
+        socket.write(error);
+        return socket.end();
       }
       const fileStream = readFileSync(filePath);
       const response = [
