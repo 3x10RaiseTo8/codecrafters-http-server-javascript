@@ -7,6 +7,7 @@ const { resolve } = require('path');
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     const request = data.toString().split(/\s+/);
+    console.log(request);
     const path = request[1];
 
     const ok = 'HTTP/1.1 200 OK';
