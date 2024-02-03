@@ -1,5 +1,6 @@
 const { existsSync, readFileSync } = require('fs');
 const net = require('net');
+const { resolve } = require('path');
 
 // concurrency already implemented?
 
@@ -18,11 +19,11 @@ const server = net.createServer((socket) => {
       socket.write(ok + enter + enter);
     } else if (path.match(/\/files/)) {
       const file = path.slice(7);
-      const filePath = `${process.argv[3]}/${file}`;
+      const filePath = resolve(process.argv[3], file);
       if (!existsSync(filePath)) {
         return socket.write(error);
       }
-      const fileStream = readFileSync(filePath, 'utf-8');
+      const fileStream = readFileSync(filePath);
       const response = [
         ok,
         typeOctet,
