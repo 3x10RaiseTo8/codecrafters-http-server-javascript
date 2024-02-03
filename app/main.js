@@ -25,8 +25,8 @@ const server = net.createServer((socket) => {
       console.log('filePath', filePath);
 
       if (method === 'POST') {
-        const fileContent = data.toString.split('\r\n');
-        writeFileSync(filePath, fileContent);
+        const fileContent = data.toString().split('\r\n');
+        writeFileSync(filePath, fileContent[1]);
         socket.write(created + enter + enter);
         socket.end();
       }
