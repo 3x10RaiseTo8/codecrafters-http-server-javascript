@@ -9,6 +9,7 @@ const server = net.createServer((socket) => {
     const request = data.toString().split(/\s+/);
     console.log(request);
     const path = request[1];
+    const method = request[0];
 
     const ok = 'HTTP/1.1 200 OK';
     const error = 'HTTP/1.1 404 Not found';
