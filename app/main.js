@@ -21,10 +21,13 @@ const server = net.createServer((socket) => {
     } else if (path.match(/\/files/)) {
       const file = path.slice(7);
       const filePath = resolve(process.argv[3], file);
+      console.log('filePath', filePath);
       if (!existsSync(filePath)) {
+        console.log("Path doesn't exist");
         socket.write(error);
         return socket.end();
       }
+      console.log('Exists!');
       const fileStream = readFileSync(filePath);
       const response = [
         ok,
