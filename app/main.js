@@ -24,7 +24,7 @@ const server = net.createServer((socket) => {
       console.log('filePath', filePath);
       if (!existsSync(filePath)) {
         console.log("Path doesn't exist");
-        socket.write(error);
+        socket.write(error + enter + enter);
         return socket.end();
       }
       console.log('Exists!');
